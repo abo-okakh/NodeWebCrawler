@@ -1,5 +1,4 @@
 // tools 
-const puppeteer = require('puppeteer');
 const crawl = require('./Crawl')
 
 let SearchTerm = 'cooking'
@@ -9,7 +8,7 @@ const yt = 'https://www.youtube.com/results?search_query=video'
 const reddit = 'https://www.reddit.com/'
 
 
-crawl(reddit)
+crawl(yt,4,10)
 
 
 
