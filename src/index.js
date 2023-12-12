@@ -7,4 +7,4 @@ const yt = 'https://www.youtube.com/results?search_query=video'
 const yt_exp = 'https://www.youtube.com/hashtag/explore'
 
 const reddit = 'https://www.reddit.com/'
-crawl(Tools_Bing_Yt,20, 10); // minutes
+crawl(Tools_Bing_Yt,3, 2); // minutes

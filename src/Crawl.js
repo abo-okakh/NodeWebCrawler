@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 const { JsonWrite } = require('./json');
 
-async function crawl(url, maxDepth, maxTime, excludedWebsitesFile) {
+async function crawl(url, maxDepth, maxTime) {
   const timeLimit = maxTime * 60 * 1000; // Convert minutes to milliseconds
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
