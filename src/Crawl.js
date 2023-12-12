@@ -2,17 +2,27 @@
 const puppeteer = require('puppeteer');
 const { JsonWrite } = require('./json');
 
-async function crawl(url, maxDepth, maxTime) {
+async function crawl(url, maxDepth, maxTime, excludedWebsitesFile) {
   const timeLimit = maxTime * 60 * 1000; // Convert minutes to milliseconds
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const visitedUrls = new Set();
   const startTime = Date.now();
+  const excludedWebsites = require('./excluded-websites.json').websites;
+
+  function isExcluded(pageUrl) {
+    return excludedWebsites.some(excludedUrl => pageUrl.includes(excludedUrl));
+  }
 
   async function visit(pageUrl, currentDepth) {
-    console.log('Visiting:', pageUrl, 'at depth:', currentDepth);
+    // console.log('Visiting:', pageUrl, 'at depth:', currentDepth);
 
-    if (currentDepth > maxDepth || visitedUrls.has(pageUrl) || Date.now() - startTime > timeLimit) {
+    if (
+      currentDepth > maxDepth ||
+      visitedUrls.has(pageUrl) ||
+      Date.now() - startTime > timeLimit ||
+      isExcluded(pageUrl)
+    ) {
       return;
     }
 
@@ -73,8 +83,7 @@ async function crawl(url, maxDepth, maxTime) {
       JsonWrite('data.json', {
         'Youtube': { url: oneUrl, type: 'yt-shorts' }
       });
-    }
-     else {
+    } else {
       JsonWrite('data.json', {
         'Website': { url: oneUrl, type: 'other' }
       });
