@@ -1,7 +1,6 @@
 
 # Web Crawler
-
-Hello! This is a web crawler designed for extracting information from websites.
+This is a web crawler designed for extracting information from websites.
 
 ### Getting Started
 
